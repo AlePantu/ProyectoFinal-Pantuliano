@@ -12,20 +12,20 @@ class Usuario(models.Model):
     
 class Producto(models.Model):
 
-    nombreProd = models.CharField(max_length=30)
-    tipoProd = models.CharField(max_length=30)
-    modeloProd = models.CharField(max_length=30)
-    descripProd = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=30)
+    tipo= models.CharField(max_length=30)
+    modelo = models.CharField(max_length=30)
+    descripcion= models.CharField(max_length=30)
 
     def __str__(self) -> str:
-        return f'{self.nombreProd}, tipo producto: {self.tipoProd} , modelo: {self.nroLegajo} , descripcion: {self.descripProd}'
+        return f'{self.nombre}, tipo producto: {self.tipo} , modelo: {self.modelo} , descripcion: {self.descripcion}'
 
 class Proveedor(models.Model):
 
-    nombreProv = models.CharField(max_length=30)
-    cuitProv =models.IntegerField(max_length=11)
-    emailProv = models.EmailField(null=True)
-    nroProv = models.IntegerField(max_length=4)
+    nombre = models.CharField(max_length=30)
+    cuit =models.IntegerField(max_length=11)
+    email = models.EmailField(null=True)
+    numero = models.IntegerField(max_length=4)
 
     def __str__(self) -> str:
-        return f'{self.nombreProv} , CUIT:  {self.cuitProv} , nro Proveedor: {self.nroProv} , email: {self.emailProv}'
+        return f'{self.nombre} , CUIT:  {self.cuit} , nro Proveedor: {self.numero} , email: {self.email}'

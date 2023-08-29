@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+           
+<form action="{% url 'UsuarioFormulario' %}" method="post">{% csrf_token %}
+
+    {{miFormulario.as_p}}
+
+    <button type="submit">Enviar</button>
+</form>
+{% endblock bloqueMutable %}
