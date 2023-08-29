@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+            <h1>Seccion de Usuarios</h1>
+            <p>
+                Lista de Usuarios
+            </p>
+
+            <ul>
+        
+                {% for usuario  in usuarios %}
+                
+                    <li>{{usuario}}</li>
+                    
+                {% endfor %}
+                    
+        
+            </ul>
+{% endblock bloqueMutable %}

@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+            <h1>Seccion de Productos</h1>
+            <p>
+                Lista de Productos
+            </p>
+
+            <ul>
+        
+                {% for producto  in productos %}
+                
+                    <li>{{producto}}</li>
+                    
+                {% endfor %}
+                    
+        
+            </ul>
+{% endblock bloqueMutable %}

@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+            <h1>Seccion de Proveedores</h1>
+            <p>
+                Lista de Proveedores
+            </p>
+
+            <ul>
+        
+                {% for proveedor  in proveedores %}
+                
+                    <li>{{proveedor}}</li>
+                    
+                {% endfor %}
+                    
+        
+            </ul>
+{% endblock bloqueMutable %}
