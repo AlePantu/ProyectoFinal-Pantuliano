@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+           
+<form action="{% url 'Buscar' %}" method="get">
+
+    <p><input type="text" name="nombre"></p>
+
+    <button type="submit">Buscar Producto</button>
+</form>
+{% endblock bloqueMutable %}

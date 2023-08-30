@@ -8,6 +8,8 @@ urlpatterns = [
     path('proveedores/', proveedores , name='Proveedores'),
     path('usuario-formulario/' , usuario_formulario , name='UsuarioFormulario'),
     path('producto-formulario/' , producto_formulario , name='ProductoFormulario'),
-    path('proveedor-formulario/' , proveedor_formulario , name='ProveedorFormulario')
+    path('proveedor-formulario/' , proveedor_formulario , name='ProveedorFormulario'),
+    path('busqueda-producto/' , busqueda_producto , name='BusquedaProducto'),
+    path('buscar/' , buscar , name='Buscar')
 ]
 

@@ -101,3 +101,20 @@ def proveedor_formulario(req : HttpRequest):
         miFormulario = ProveedorFormulario()
 
         return render(req, "proveedor_formulario.html" , {"miFormulario" : miFormulario})
+    
+
+def busqueda_producto(req):
+
+    return render(req, "busqueda-producto.html" )
+
+def buscar(req):
+
+    if req.GET["nombre"]:
+        nombre = req.GET["nombre"]
+        print('aca'+nombre)
+        productos = Producto.objects.filter(nombre__icontains = nombre)
+        if productos:
+            return render(req , "resultado-busqueda.html" ,{"productos":productos})
+    else:
+
+         return HttpResponse(f'No escribiste ningun producto')
