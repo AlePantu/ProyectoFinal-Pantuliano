@@ -3,6 +3,7 @@
     <head>
 
         {% load static %}
+        
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -16,23 +17,13 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href='{% static "css/styles.css" %}' rel="stylesheet" />
-        
     </head>
     <body>
         {% include 'navbar.html' %}
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">AppStore - Control de productos , stock y proveedores</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        
+        {% block header %}
+
+        {% endblock header %}
         
         {% block bloqueMutable %}
             
