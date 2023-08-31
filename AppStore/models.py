@@ -5,7 +5,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     email = models.EmailField(null=True)
-    nroLegajo = models.IntegerField(max_length=4)
+    nroLegajo = models.IntegerField()
 
     def __str__(self) -> str:
         return f'{self.nombre} {self.apellido} , legajo nro:{self.nroLegajo}'
@@ -23,9 +23,8 @@ class Producto(models.Model):
 class Proveedor(models.Model):
 
     nombre = models.CharField(max_length=30)
-    cuit =models.IntegerField(max_length=11)
+    cuit =models.IntegerField()
     email = models.EmailField(null=True)
-    numero = models.IntegerField(max_length=4)
-
+    numero = models.IntegerField()
     def __str__(self) -> str:
         return f'{self.nombre} , CUIT:  {self.cuit} , nro Proveedor: {self.numero} , email: {self.email}'
