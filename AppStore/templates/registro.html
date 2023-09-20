@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+<div class="container">
+  <div class="row my-5">
+      <div class="col-md-12">
+    
+        <form action="{% url 'Registrar' %}" method="POST">{% csrf_token %}
+
+           {{miFormulario.as_p}}
+
+          
+          <button type="submit">Registrar</button>
+
+          <div class="alert alert-primary" role="alert">
+            <li>Las contraseñas deben de ser como minimo de 8 caracteres</li> 
+            <li>No deben ser contraseñas comunes</li>  
+          </div>
+
+        </form>
+      </div>
+  </div>
+</div>
+
+{% endblock bloqueMutable %}

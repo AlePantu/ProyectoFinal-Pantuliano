@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+        {{ miFormulario.as_p }}
+    <button type="submit">Inciar sesion</button>
+</form>
+
+{% endblock bloqueMutable %}

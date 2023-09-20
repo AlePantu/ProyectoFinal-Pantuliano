@@ -6,13 +6,29 @@
                 Lista de Productos
             </p>
 
-            <ul>
-                {% for producto  in productos %}
-                
-                    <li>{{producto}}</li>
-                    
-                {% endfor %}
-            </ul>
+            <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Modelo</th>
+                      <th scope="col">Descripcion</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for producto in productos %}
+                  <tr>
+                      <td>{{ producto.nombre }}</td>
+                      <td>{{ producto.tipo }}</td>
+                      <td>{{ producto.modelo }}</td>
+                      <td>{{ producto.descripcion }}</td>
+                      <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}">Actualizar</a>
+                          <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}">Eliminar</a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
 
             <a class="btn btn-outline-primary" href="../producto-formulario" role="button"> Agregar Producto </a>
             <a class="btn btn-outline-primary" href="../busqueda-producto" role="button"> Buscar Producto </a>

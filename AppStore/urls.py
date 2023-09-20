@@ -1,4 +1,7 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 from .views import *
 
 urlpatterns = [
@@ -10,6 +13,10 @@ urlpatterns = [
     path('producto-formulario/' , producto_formulario , name='ProductoFormulario'),
     path('proveedor-formulario/' , proveedor_formulario , name='ProveedorFormulario'),
     path('busqueda-producto/' , busqueda_producto , name='BusquedaProducto'),
-    path('buscar/' , buscar , name='Buscar')
+    path('buscar/' , buscar , name='Buscar'),
+     path('actualiza-producto/<pk>', ProductoUpdate.as_view(), name='ActualizarProducto'),
+    path('elimina-producto/<pk>', ProductoDelete.as_view(), name='EliminaProducto'),
+    path('registrar/', register, name='Registrar'),
+    path('login/', loginView, name='Login')
 ]
 
