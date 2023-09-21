@@ -142,6 +142,28 @@ class ProductoDelete(DeleteView):
     template_name = "producto_delete.html"
     success_url = "/app-coder/"
 
+class UsuarioDelete(DeleteView):
+    model = Usuario
+    template_name = "usuario_delete.html"
+    success_url = "/app-coder/"
+
+class UsuarioUpdate(UpdateView):
+    model = Usuario
+    template_name = "usuario_update.html"
+    fields = ("__all__")
+    success_url = "/app-coder/"
+
+class ProveedorDelete(DeleteView):
+    model = Proveedor
+    template_name = "proveedor_delete.html"
+    success_url = "/app-coder/"
+
+class ProveedorUpdate(UpdateView):
+    model = Proveedor
+    template_name = "proveedor_update.html"
+    fields = ("__all__")
+    success_url = "/app-coder/"
+
 
 
 def loginView(req):

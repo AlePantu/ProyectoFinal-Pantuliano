@@ -6,16 +6,29 @@
                 Lista de Proveedores
             </p>
 
-            <ul>
-        
-                {% for proveedor  in proveedores %}
-                
-                    <li>{{proveedor}}</li>
-                    
-                {% endfor %}
-                    
-        
-            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">CUIT</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">NroProveedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proveedor in proveedores %}
+                    <tr>
+                        <td>{{ proveedor.nombre }}</td>
+                        <td>{{ proveedor.cuit }}</td>
+                        <td>{{ proveedor.email }}</td>
+                        <td>{{ proveedor.numero }}</td>
+                         <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProveedor' proveedor.id %}">Actualizar</a>
+                            <a type="button" class="btn btn-danger" href="{% url 'EliminaProveedor' proveedor.id %}">Eliminar</a>
+                        </td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
             <a class="btn btn-outline-primary" href="../proveedor-formulario" role="button"> Agregar Proveedor </a>
 {% endblock bloqueMutable %}

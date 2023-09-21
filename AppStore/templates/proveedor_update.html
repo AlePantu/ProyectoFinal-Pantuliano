@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+    
+    <form action="{% url 'ActualizarProveedor' proveedor.id%}" method="post">{% csrf_token %}
+
+        {{form.as_p}}
+
+        <button type="submit">Enviar</button>
+    </form>
+
+{% endblock bloqueMutable %}

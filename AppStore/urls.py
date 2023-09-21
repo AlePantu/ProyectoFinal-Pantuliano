@@ -14,8 +14,12 @@ urlpatterns = [
     path('proveedor-formulario/' , proveedor_formulario , name='ProveedorFormulario'),
     path('busqueda-producto/' , busqueda_producto , name='BusquedaProducto'),
     path('buscar/' , buscar , name='Buscar'),
-     path('actualiza-producto/<pk>', ProductoUpdate.as_view(), name='ActualizarProducto'),
+    path('actualiza-producto/<pk>', ProductoUpdate.as_view(), name='ActualizarProducto'),
     path('elimina-producto/<pk>', ProductoDelete.as_view(), name='EliminaProducto'),
+    path('actualiza-usuario/<pk>', UsuarioUpdate.as_view(), name='ActualizarUsuario'),
+    path('elimina-usuario/<pk>', UsuarioDelete.as_view(), name='EliminaUsuario'),
+    path('actualiza-proveedor/<pk>', ProveedorUpdate.as_view(), name='ActualizarProveedor'),
+    path('elimina-proveedor/<pk>', ProveedorDelete.as_view(), name='EliminaProveedor'),
     path('registrar/', register, name='Registrar'),
     path('login/', loginView, name='Login')
 ]
