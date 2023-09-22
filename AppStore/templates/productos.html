@@ -22,9 +22,11 @@
                       <td>{{ producto.tipo }}</td>
                       <td>{{ producto.modelo }}</td>
                       <td>{{ producto.descripcion }}</td>
+                      {%if user.is_staff%}
                       <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}">Actualizar</a>
                           <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}">Eliminar</a>
                       </td>
+                      {% endif%}
                   </tr>
                   {% endfor %}
               </tbody>

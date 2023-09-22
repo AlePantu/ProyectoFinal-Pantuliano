@@ -21,6 +21,7 @@ urlpatterns = [
     path('actualiza-proveedor/<pk>', ProveedorUpdate.as_view(), name='ActualizarProveedor'),
     path('elimina-proveedor/<pk>', ProveedorDelete.as_view(), name='EliminaProveedor'),
     path('registrar/', register, name='Registrar'),
-    path('login/', loginView, name='Login')
+    path('login/', loginView, name='Login'),
+    path('logout/', LogoutView.as_view(template_name="inicio.html"), name="Logout"),
 ]
 
