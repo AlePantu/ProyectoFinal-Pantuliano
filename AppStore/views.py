@@ -217,3 +217,7 @@ def register(req):
         print("NO POST")
         miFormulario = UserRegisterForm()
         return render(req, "registro.html", {"miFormulario": miFormulario})
+
+
+def about(req):
+    return render(req, "about.html")

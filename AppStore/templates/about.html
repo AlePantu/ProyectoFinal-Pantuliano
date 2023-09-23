@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{%load static%}
+{% block bloqueMutable %}
+<body>
+    <h2 style="text-align:center">About Me</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <div class="container">
+        <img src= "{% static '../static/assets/img/yo.png' %}" style="float:center;width:100px;height:180px;">
+        <h2>Alejandro Pantuliano</h2>
+        <p class="title">Analista de Sistemas</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>alepantuliano@hotmail.com</p>  
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock bloqueMutable %}
