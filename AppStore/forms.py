@@ -3,11 +3,13 @@ from django.contrib.auth.forms import UserChangeForm ,UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
 
-class UsuarioFormulario(forms.Form):
-    nombre = forms.CharField(required=True)
-    apellido = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    nroLegajo = forms.IntegerField(required=True)
+class UsuarioFormulario(forms.ModelForm):
+    
+    class Meta:
+        model = Usuario
+        fields = ('nombre','apellido', 'email', 'nroLegajo')
+
+    
 
     
 class ProductoFormulario(forms.Form):
@@ -34,4 +36,4 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         # Saca los mensajes de ayuda
-        help_texts = {k:"" for k in fields}
+        #help_texts = {k:"" for k in fields}

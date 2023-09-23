@@ -23,8 +23,8 @@
                       <td>{{ producto.modelo }}</td>
                       <td>{{ producto.descripcion }}</td>
                       {%if user.is_staff%}
-                      <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}">Actualizar</a>
-                          <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}">Eliminar</a>
+                      <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}"><i class="bi bi-pencil-square"></i></a>
+                          <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}"><i class="bi bi-trash"></i></a>
                       </td>
                       {% endif%}
                   </tr>
@@ -33,7 +33,7 @@
           </table>
 
                 {% if user.is_staff %}
-                <a class="btn btn-outline-primary" href="../producto-formulario" role="button"> Agregar Producto </a>
+                <a class="btn btn-primary" href="../producto-formulario" role="button"> <i class="bi bi-plus"></i></a>
                 {% endif %}
-            <a class="btn btn-outline-primary" href="../busqueda-producto" role="button"> Buscar Producto </a>
+            <a class="btn btn-primary" href="../busqueda-producto" role="button"><i class="bi bi-search"></i></a>
 {% endblock bloqueMutable %}

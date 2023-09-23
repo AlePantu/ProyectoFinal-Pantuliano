@@ -22,13 +22,13 @@
                         <td>{{ proveedor.cuit }}</td>
                         <td>{{ proveedor.email }}</td>
                         <td>{{ proveedor.numero }}</td>
-                         <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProveedor' proveedor.id %}">Actualizar</a>
-                            <a type="button" class="btn btn-danger" href="{% url 'EliminaProveedor' proveedor.id %}">Eliminar</a>
+                         <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProveedor' proveedor.id %}"><i class="bi bi-pencil-square"></i></a>
+                            <a type="button" class="btn btn-danger" href="{% url 'EliminaProveedor' proveedor.id %}"><i class="bi bi-trash"></i></a>
                         </td> 
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
-            <a class="btn btn-outline-primary" href="../proveedor-formulario" role="button"> Agregar Proveedor </a>
+            <a class="btn btn-primary" href="../proveedor-formulario" role="button"> <i class="bi bi-plus"></i> </a>
 {% endblock bloqueMutable %}

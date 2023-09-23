@@ -22,13 +22,13 @@
                         <td>{{ usuario.apellido }}</td>
                         <td>{{ usuario.email }}</td>
                         <td>{{ usuario.nroLegajo }}</td>
-                         <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarUsuario' usuario.id %}">Actualizar</a>
-                            <a type="button" class="btn btn-danger" href="{% url 'EliminaUsuario' usuario.id %}">Eliminar</a>
+                         <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarUsuario' usuario.id %}"><i class="bi bi-pencil-square"></i></a>
+                            <a type="button" class="btn btn-danger" href="{% url 'EliminaUsuario' usuario.id %}"><i class="bi bi-trash"></i></a>
                         </td> 
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             
-            <a class="btn btn-outline-primary" href="../usuario-formulario" role="button"> Agregar Usuario </a>
+            <a class="btn btn-primary" href="{% url 'Registrar' %}" role="button"><i class="bi bi-person-plus"></i></a>
 {% endblock bloqueMutable %}

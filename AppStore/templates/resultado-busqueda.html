@@ -3,11 +3,38 @@
 {% block bloqueMutable %}
             <h1>Resultado busqueda</h1>
 
-            <ul>
-                {% for producto  in productos %}
-                
-                    <li>{{producto}}</li>
-                    
-                {% endfor %}
-            </ul>
+            {%if productos%}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.tipo }}</td>
+                        <td>{{ producto.modelo }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        {%if user.is_staff%}
+                        <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}"><i class="bi bi-pencil-square"></i></a>
+                            <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}"><i class="bi bi-trash"></i></a>
+                        </td>
+                        {% endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+  
+                  {% if user.is_staff %}
+                  <a class="btn btn-primary" href="../producto-formulario" role="button"> <i class="bi bi-plus"></i></a>
+                  {% endif %}
+
+            {%else%}
+                <h1>{{mensaje}}</h1>
+            {% endif%}
 {% endblock bloqueMutable %}

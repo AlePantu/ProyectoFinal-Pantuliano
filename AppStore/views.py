@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm ,UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -33,32 +33,6 @@ def proveedores(req):
     lista = Proveedor.objects.all()
 
     return render(req,"proveedores.html" , {"proveedores": lista})
-
-
-def usuario_formulario(req : HttpRequest):
-
-    print('method' , req.method)
-    print('post' , req.POST)
-
-
-    if req.method == 'POST':
-
-        miFormulario = UsuarioFormulario(req.POST)
-        if miFormulario.is_valid():
-
-            print(miFormulario.cleaned_data)
-            data = miFormulario.cleaned_data
-
-            usuario = Usuario(nombre = data["nombre"] , apellido = data["apellido"] , email = data["email"] , nroLegajo = data["nroLegajo"])
-            usuario.save()
-            return render (req , "inicio.html" , {"mensaje":"Usuario creado con exito" })
-        else:
-            return render (req , "inicio.html" , {"mensaje":"Formulario Invalido" })
-    else:
-
-        miFormulario = UsuarioFormulario()
-
-        return render(req, "usuario_formulario.html" , {"miFormulario" : miFormulario})
     
 
 
@@ -122,10 +96,11 @@ def buscar(req):
 
     if req.GET["nombre"]:
         nombre = req.GET["nombre"]
-        print('aca'+nombre)
         productos = Producto.objects.filter(nombre__icontains = nombre)
-        if productos:
+        if (productos.__len__() > 0):
             return render(req , "resultado-busqueda.html" ,{"productos":productos})
+        else:
+            return render(req , "resultado-busqueda.html" ,{"mensaje":"No se encontraron productos" })
     else:
 
          return HttpResponse(f'No escribiste ningun producto')
@@ -135,34 +110,34 @@ class ProductoUpdate(UpdateView):
     model = Producto
     template_name = "producto_update.html"
     fields = ("__all__")
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 class ProductoDelete(DeleteView):
     model = Producto
     template_name = "producto_delete.html"
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 class UsuarioDelete(DeleteView):
     model = Usuario
     template_name = "usuario_delete.html"
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 class UsuarioUpdate(UpdateView):
     model = Usuario
     template_name = "usuario_update.html"
     fields = ("__all__")
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 class ProveedorDelete(DeleteView):
     model = Proveedor
     template_name = "proveedor_delete.html"
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 class ProveedorUpdate(UpdateView):
     model = Proveedor
     template_name = "proveedor_update.html"
     fields = ("__all__")
-    success_url = "/app-coder/"
+    success_url = "/app-store/"
 
 
 
@@ -193,31 +168,58 @@ def loginView(req):
         miFormulario = AuthenticationForm()
         return render(req, "login.html", {"miFormulario": miFormulario})
 
+
+def about(req):
+    return render(req, "about.html")
+
+
 def register(req):
 
     if req.method == 'POST':
 
-        miFormulario = UserRegisterForm(req.POST)
+        info = req.POST
 
-        if miFormulario.is_valid():
+        miFormulario = UsuarioFormulario({
+            "nombre": info["nombre"],
+            "apellido": info["apellido"],
+            "email": info["email"],
+            "nroLegajo": info["nroLegajo"]
+        })
+        
+        userForm = UserCreationForm({
+            "username": info["username"],
+            "password1": info["password1"],
+            "password2": info["password2"]
+        })
+
+        if miFormulario.is_valid() and userForm.is_valid():
 
             data = miFormulario.cleaned_data
+            data.update(userForm.cleaned_data)
 
-            usuario = data["username"]
+            user = User(username=data["username"])
+            user.set_password(data["password1"])
+            user.first_name=(data["nombre"])
+            user.last_name =(data["apellido"])
+            user.email=(data["email"])
+            user.save()
 
-            miFormulario.save()
-            print("TRUE")
-            return render(req, "inicio.html", {"mensaje": f"Usuario {usuario} creado con éxito!"})
-
+            usuario = Usuario(
+                nombre=data["nombre"], 
+                apellido=data["apellido"], 
+                email=data["email"],
+                nroLegajo=data["nroLegajo"],
+                user=user
+            )
+            usuario.save()
+            return render(req, "inicio.html", {"mensaje": "Usuario creado con éxito"})
         else:
-            print("FALSE")
+            print(miFormulario.errors)
+            print(userForm.errors)
             return render(req, "inicio.html", {"mensaje": "Formulario inválido"})
-        
     else:
-        print("NO POST")
-        miFormulario = UserRegisterForm()
-        return render(req, "registro.html", {"miFormulario": miFormulario})
 
+        miFormulario = UsuarioFormulario()
+        userForm = UserCreationForm()
 
-def about(req):
-    return render(req, "about.html")
+        return render(req, "registro.html", {"miFormulario": miFormulario, "userForm": userForm})
