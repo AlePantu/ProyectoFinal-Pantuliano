@@ -118,47 +118,47 @@ class ProductoUpdate(UpdateView):
     model = Producto
     template_name = "producto_update.html"
     fields = ("__all__")
-    success_url = "/app-store/"
+    success_url = "/app-store/productos"
 
 class ProductoDelete(DeleteView):
     model = Producto
     template_name = "producto_delete.html"
-    success_url = "/app-store/"
+    success_url = "/app-store/productos"
 
 class UsuarioDelete(DeleteView):
     model = Usuario
     template_name = "usuario_delete.html"
-    success_url = "/app-store/"
+    success_url = "/app-store/usuarios"
 
 class UsuarioUpdate(UpdateView):
     model = Usuario
     template_name = "usuario_update.html"
     fields = ("__all__")
-    success_url = "/app-store/"
+    success_url = "/app-store/usuarios"
 
 class ProveedorDelete(DeleteView):
     model = Proveedor
     template_name = "proveedor_delete.html"
-    success_url = "/app-store/"
+    success_url = "/app-store/proveedores"
 
 class ProveedorUpdate(UpdateView):
     model = Proveedor
     template_name = "proveedor_update.html"
     fields = ("__all__")
-    success_url = "/app-store/"
+    success_url = "/app-store/proveedores"
 
 
 
 class PedidoDelete(DeleteView):
     model = Pedido
     template_name = "pedido_delete.html"
-    success_url = "/app-store/"
+    success_url = "/app-store/pedidos"
 
 class PedidoUpdate(UpdateView):
     model = Pedido
     template_name = "pedido_update.html"
     fields = ("__all__")
-    success_url = "/app-store/"
+    success_url = "/app-store/pedidos"
 
 
 
