@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -9,8 +9,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from datetime import datetime
+from .forms import PedidoFormSet
 
-from .models import Usuario , Producto , Proveedor
+from .models import Usuario , Producto , Proveedor , Pedido
 from .forms import *
 
 # Create your views here.
@@ -27,6 +29,12 @@ def productos(req):
     lista = Producto.objects.all()
 
     return render(req,"productos.html" , {"productos": lista})
+
+
+def pedidos(req):
+    pedidos = Pedido.objects.all()
+
+    return render(req,"pedidos.html" , {"pedidos": pedidos })
 
 @staff_member_required(login_url='/app-store/login')
 def proveedores(req):
@@ -141,6 +149,19 @@ class ProveedorUpdate(UpdateView):
 
 
 
+class PedidoDelete(DeleteView):
+    model = Pedido
+    template_name = "pedido_delete.html"
+    success_url = "/app-store/"
+
+class PedidoUpdate(UpdateView):
+    model = Pedido
+    template_name = "pedido_update.html"
+    fields = ("__all__")
+    success_url = "/app-store/"
+
+
+
 def loginView(req):
 
     if req.method == 'POST':
@@ -223,3 +244,31 @@ def register(req):
         userForm = UserCreationForm()
 
         return render(req, "registro.html", {"miFormulario": miFormulario, "userForm": userForm})
+    
+    
+def pedido_formulario(req : HttpRequest):
+
+
+
+    if req.method == 'POST':
+
+        miFormulario = PedidoFormSet(req.POST)
+        if miFormulario.is_valid():
+            
+            pedido = Pedido.objects.create()
+            
+            for form in miFormulario:
+                if form.cleaned_data.get('productos'):
+                    pedido.productos.add(*form.cleaned_data['productos'])
+
+            pedido.user = req.user
+            pedido.save()
+        
+            return render (req , "inicio.html" , {"mensaje":"Pedido creado con exito" })
+        else:
+            return render (req , "inicio.html" , {"mensaje":"Formulario Invalido" })
+    else:
+
+        miFormulario = PedidoFormSet()
+
+        return render(req, "pedido_formulario.html" , {"miFormulario" : miFormulario})

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm ,UserCreationForm
+from django.forms import formset_factory
 from django.contrib.auth.models import User
 from .models import *
 
@@ -37,3 +38,13 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         # Saca los mensajes de ayuda
         #help_texts = {k:"" for k in fields}
+
+
+class PedidoFormulario(forms.Form):
+    
+   productos = forms.ModelMultipleChoiceField(
+        queryset=Producto.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+
+PedidoFormSet = formset_factory(PedidoFormulario)

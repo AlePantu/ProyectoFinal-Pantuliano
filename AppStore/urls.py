@@ -9,7 +9,9 @@ urlpatterns = [
     path('usuarios/', usuarios ,name='Usuarios'),
     path('productos/', productos, name='Productos'),
     path('proveedores/', proveedores , name='Proveedores'),
+    path('pedidos/', pedidos ,name='Pedidos'),
     path('producto-formulario/' , producto_formulario , name='ProductoFormulario'),
+    path('pedido-formulario/' , pedido_formulario , name='PedidoFormulario'),
     path('proveedor-formulario/' , proveedor_formulario , name='ProveedorFormulario'),
     path('busqueda-producto/' , busqueda_producto , name='BusquedaProducto'),
     path('buscar/' , buscar , name='Buscar'),
@@ -23,5 +25,7 @@ urlpatterns = [
     path('login/', loginView, name='Login'),
     path('logout/', LogoutView.as_view(template_name="inicio.html"), name="Logout"),
     path('about/', about, name='About'),
+     path('actualiza-pedido/<pk>', PedidoUpdate.as_view(), name='ActualizarPedido'),
+    path('elimina-pedido/<pk>', PedidoDelete.as_view(), name='EliminaPedido'),
 ]
 

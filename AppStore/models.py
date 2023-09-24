@@ -30,3 +30,12 @@ class Proveedor(models.Model):
     numero = models.IntegerField()
     def __str__(self) -> str:
         return f'{self.nombre} , CUIT:  {self.cuit} , nro Proveedor: {self.numero} , email: {self.email}'
+    
+class Pedido(models.Model):
+
+    fecha = models.DateField(auto_now_add=True)
+    productos = models.ManyToManyField(Producto)
+    user = models.ForeignKey(User, on_delete=models.CASCADE , null=True)
+
+    def __str__(self) -> str:
+        return f'Fecha :{self.fecha} , Productos:  {self.productos} , Usuario: {self.user}'
