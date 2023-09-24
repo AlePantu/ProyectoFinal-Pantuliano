@@ -13,6 +13,7 @@
                       <th scope="col">Tipo</th>
                       <th scope="col">Modelo</th>
                       <th scope="col">Descripcion</th>
+                      <th scope="col">Stock</th>
                   </tr>
               </thead>
               <tbody>
@@ -22,6 +23,7 @@
                       <td>{{ producto.tipo }}</td>
                       <td>{{ producto.modelo }}</td>
                       <td>{{ producto.descripcion }}</td>
+                      <td>{{ producto.stock }}</td>
                       {%if user.is_staff%}
                       <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}"><i class="bi bi-pencil-square"></i></a>
                           <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}"><i class="bi bi-trash"></i></a>

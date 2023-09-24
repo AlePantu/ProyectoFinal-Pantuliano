@@ -18,9 +18,10 @@ class Producto(models.Model):
     tipo= models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
     descripcion= models.CharField(max_length=30)
+    stock = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.nombre}, tipo producto: {self.tipo} , modelo: {self.modelo} , descripcion: {self.descripcion}'
+        return f'{self.nombre}, tipo producto: {self.tipo} , modelo: {self.modelo} , descripcion: {self.descripcion} , stock:{self.stock}'
 
 class Proveedor(models.Model):
 
