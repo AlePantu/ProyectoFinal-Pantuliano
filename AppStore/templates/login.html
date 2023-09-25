@@ -2,10 +2,28 @@
 
 {% block bloqueMutable %}
 
-<form action="" method="POST">
+{% comment %} <form action="" method="POST">
     {% csrf_token %}
         {{ miFormulario.as_p }}
     <button type="submit">Inciar sesion</button>
-</form>
+</form> {% endcomment %}
+
+<div class="container">
+    
+    <div class="row">
+        
+        <div class="col-md-6 offset-md-3 mt-5">
+            <div class="card">
+            <h2>Iniciar Sesión</h2>
+            <form  action="" method="POST">
+                {% csrf_token %}
+                {{ miFormulario.as_p }}
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
 
 {% endblock bloqueMutable %}

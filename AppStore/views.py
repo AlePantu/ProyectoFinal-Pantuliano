@@ -323,3 +323,30 @@ def responder_mensaje(request, mensaje_id):
     form = MensajeForm(initial={'destinatario': mensaje.emisor})
 
     return render(request, 'responder_mensaje.html', {'mensaje': mensaje, 'form': form})
+
+
+def editar_perfil(req):
+
+    usuario = req.user
+
+    if req.method == 'POST':
+
+        miFormulario = UserEditForm(req.POST, instance=req.user)
+        
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+            usuario.set_password(data["password1"])
+            usuario.save()
+            return render(req, "inicio.html", {"mensaje": "Perfil actualizado con éxito"})
+        else:
+            return render(req, "editarPerfil.html", {"miFormulario": miFormulario})
+    else:
+
+        miFormulario = UserEditForm(instance=req.user)
+
+        return render(req, "editarPerfil.html", {"miFormulario": miFormulario})

@@ -2,20 +2,18 @@
 
 {%load static%}
 {% block bloqueMutable %}
-<body>
-    <h2 style="text-align:center">About Me</h2>
+
+  <h2 style="text-align:center">About Me</h2>
 <div class="row">
   <div class="column">
     <div class="card">
       <div class="container">
-        <img src= "{% static '../static/assets/img/yo.png' %}" style="float:center;width:100px;height:180px;">
+         <img src="{% static '../static/assets/img/yo.png' %}" alt="Mi Foto" class="img-fluid rounded-circle">
         <h2>Alejandro Pantuliano</h2>
-        <p class="title">Analista de Sistemas</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Estudie en el Instituto ORT la carrera de Analista de Sistemas realice los cursos en CODERHOUSE de JavaScript , Ciberseguridad y Python</p>
         <p>alepantuliano@hotmail.com</p>  
       </div>
     </div>
   </div>
-</body>
-</html>
+
 {% endblock bloqueMutable %}

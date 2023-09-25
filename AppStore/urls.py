@@ -30,6 +30,7 @@ urlpatterns = [
     path('enviar-mensaje/', enviar_mensaje, name='EnviarMensaje'),
     path('ver-mensajes/', ver_mensajes, name='Mensajes'),
     path('responder-mensaje/<int:mensaje_id>/',responder_mensaje, name='responder_mensaje'),
-    path('eliminar-mensaje/<pk>/', MensajeDelete.as_view(), name='EliminarMensaje')
+    path('eliminar-mensaje/<pk>/', MensajeDelete.as_view(), name='EliminarMensaje'),
+    path('editar-perfil/', editar_perfil, name="EditarPerfil"),
 ]
 
