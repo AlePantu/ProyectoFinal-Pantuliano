@@ -13,7 +13,9 @@
                       <th scope="col">Tipo</th>
                       <th scope="col">Modelo</th>
                       <th scope="col">Descripcion</th>
+                      {%if user.is_staff%}
                       <th scope="col">Stock</th>
+                      {% endif%}
                   </tr>
               </thead>
               <tbody>
@@ -23,8 +25,8 @@
                       <td>{{ producto.tipo }}</td>
                       <td>{{ producto.modelo }}</td>
                       <td>{{ producto.descripcion }}</td>
-                      <td>{{ producto.stock }}</td>
                       {%if user.is_staff%}
+                      <td>{{ producto.stock }}</td>
                       <td><a type="button" class="btn btn-warning" href="{% url 'ActualizarProducto' producto.id %}"><i class="bi bi-pencil-square"></i></a>
                           <a type="button" class="btn btn-danger" href="{% url 'EliminaProducto' producto.id %}"><i class="bi bi-trash"></i></a>
                       </td>

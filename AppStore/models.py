@@ -15,14 +15,14 @@ class Usuario(models.Model):
     
 class Producto(models.Model):
 
-    nombre = models.CharField(max_length=30)
-    tipo= models.CharField(max_length=30)
-    modelo = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
+    tipo= models.CharField(max_length=50)
+    modelo = models.CharField(max_length=50)
     descripcion= models.CharField(max_length=150)
     stock = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.nombre}, tipo producto: {self.tipo} , modelo: {self.modelo} , descripcion: {self.descripcion} , stock:{self.stock}'
+        return f'{self.nombre}, tipo producto: {self.tipo} , modelo: {self.modelo} , descripcion: {self.descripcion}'
 
 class Proveedor(models.Model):
 

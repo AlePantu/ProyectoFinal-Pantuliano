@@ -1,19 +1,21 @@
-Tercer pre-entrega Proyecto Final
+Proyecto Final
 
 Autor: Alejandro Pantuliano
 Curso: Python 
 Comision: 43875
 Profesor: Mauricio Cuello
 
-AppStore sera una aplicacion web donde se pueda llevar control acerca del stock de los productos utilizados por el sector mantenimiento de mi lugar de trabajo para poder llevar control y trazabilidad de los mismos. 
+La idea de AppStore es que sea una aplicacion web que ayude al control de los productos ingresados, su stock e informacion acerca de los proveedores habituales de la empresa , que los usuarios puedan solicitar productos para realizar tareas dentro de la empresa como tambien tener un sistema de mensajes de comunicacion y registro de pedidos. 
 
-Tendra una lista de usuarios del sistema , la lista de productos y proveedores de los mismos.
+AppStore es una aplicacion WEB donde hay dos tipos de usuarios : El Administrador que podra crear Usuarios , cargar productos y proveedores como asi tambien modificarlos. Los Usuarios podran ver la lista de productos que hay y realizar un pedido de los mismos. 
 
-Se tratara de ir escalando la aplicacion para que en un futuro tenga mas funcionalidades. 
+AppStore tambien cuenta con un sistema de Mensajes entre usuarios sea cual fuese su rol. Los mensajes seran vistos desde la seccion mensaje y podran ser respondidos o borrados.
 
 Funcionalidad:
 
-Una vez levantado el server , se debe colocar "/app-store" en la direccion para ingresar a la pantalla de incio.
-En el navbar tendremos la solapas de USUARIO - PRODUCTOS - PROVEEDORES , ingresando en cualquiera de estas solapas nos desplegara una lista con lo que tengamos en la BD y debajo un boton para agregar uno nuevo , sea usuario , producto o proveedor. 
+Una vez levantado el server se debera colocar la extension /app-store/ a la direccion por defecto (en mi caso quedaria: http://127.0.0.1:8000/app-store/) y lo que se vera sera la pagina de INICIO.
 
-En la seccion PRODUCTOS tambien poseemos un boton para realizar una busqueda que nos desplegara un forms para ingresar los parametros de la busqueda y una vez completo nos desplegara los resultados.
+Link a la carpeta con video explicativo de las funcionalidades de la aplicacion:
+
+https://drive.google.com/drive/folders/1xf-WBnz60sa39mc-t4BLoduRxY7pOAfq?usp=sharing
+

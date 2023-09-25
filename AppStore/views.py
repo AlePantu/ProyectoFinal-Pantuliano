@@ -8,7 +8,6 @@ from django.contrib.auth.forms import AuthenticationForm ,UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required 
-from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
 from .forms import PedidoFormSet
@@ -181,12 +180,12 @@ def loginView(req):
 
             if user:
                 login(req, user)
-                return render(req, "inicio.html", {"mensaje": f"Bienvenido {usuario}"})
+                return render(req, "inicio.html", {"mensaje": "Usuario logeado con exito"})
             else:
                 return render(req, "inicio.html", {"mensaje": "Datos incorrectos"})
 
         else:
-            return render(req, "inicio.html", {"mensaje": "Formulario inválido"})
+            return render(req, "inicio.html", {"mensaje": "Datos incorrectos"})
 
     else:
         miFormulario = AuthenticationForm()
@@ -318,7 +317,7 @@ def responder_mensaje(request, mensaje_id):
             contenido = form.cleaned_data['contenido']
             respuesta = Mensaje(emisor=request.user, receptor=mensaje.emisor, contenido=contenido)
             respuesta.save()
-            return redirect('ver_mensajes')
+            return redirect('Mensajes')
 
     form = MensajeForm(initial={'destinatario': mensaje.emisor})
 
