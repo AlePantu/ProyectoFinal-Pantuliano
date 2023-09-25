@@ -8,11 +8,11 @@
             <h1 class="h3">Confirmar Eliminación</h1>
         </div>
         <div class="card-body">
-            <p>¿Estás seguro de que deseas eliminar este proveedor?</p>
+            <p>¿Estás seguro de que deseas eliminar este mensaje?</p>
             <form method="post">
                 {% csrf_token %}
                 <button class="btn btn-danger" type="submit">Sí, eliminar</button>
-                <a class="btn btn-secondary" href="{% url 'Proveedores' %}">Cancelar</a>
+                <a class="btn btn-secondary" href="{% url 'Mensajes' %}">Cancelar</a>
             </form>
         </div>
     </div>

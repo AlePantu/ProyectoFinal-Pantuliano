@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+
+
+<h1>Seleccionar Destinatario</h1>
+<ul>
+    {% for usuario in usuarios %}
+        <li>
+            <a href="{% url 'EnviarMensaje' usuario.id %}">{{ usuario.username }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock bloqueMutable %}

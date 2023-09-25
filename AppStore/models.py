@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Usuario(models.Model):
@@ -17,7 +18,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=30)
     tipo= models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
-    descripcion= models.CharField(max_length=30)
+    descripcion= models.CharField(max_length=150)
     stock = models.IntegerField()
 
     def __str__(self) -> str:
@@ -40,3 +41,13 @@ class Pedido(models.Model):
 
     def __str__(self) -> str:
         return f'Fecha :{self.fecha} , Productos:  {self.productos} , Usuario: {self.user}'
+    
+
+class Mensaje(models.Model):
+    emisor = models.ForeignKey(User, related_name='mensajes_enviados', on_delete=models.CASCADE)
+    receptor = models.ForeignKey(User, related_name='mensajes_recibidos', on_delete=models.CASCADE)
+    contenido = models.TextField()
+    fecha_envio = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'De {self.emisor} a {self.receptor} ({self.fecha_envio})'

@@ -1,14 +1,22 @@
 {% extends 'main.html' %}
 
 {% block bloqueMutable %}
-           
-<form action="{% url 'PedidoFormulario' %}" method="post">{% csrf_token %}
 
+
+<div class="container mt-5">
+    <div class="card">
+        <h1>Agregar Pedido</h1>
+ <form action="{% url 'PedidoFormulario' %}" method="post" class="container mt-5" >{% csrf_token %}
+    <div class="card">
     {{ miFormulario.management_form }}
         {% for form in miFormulario %}
             {{ form }}
         {% endfor %}
+    </div>
+        <button class="btn btn-primary" type="submit">Crear Pedido</button>
+</form>  
 
-    <button type="submit">Enviar</button>
-</form>
+</div>
+</div>
+
 {% endblock bloqueMutable %}

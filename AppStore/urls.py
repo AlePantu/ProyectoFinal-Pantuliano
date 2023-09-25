@@ -25,7 +25,11 @@ urlpatterns = [
     path('login/', loginView, name='Login'),
     path('logout/', LogoutView.as_view(template_name="inicio.html"), name="Logout"),
     path('about/', about, name='About'),
-     path('actualiza-pedido/<pk>', PedidoUpdate.as_view(), name='ActualizarPedido'),
+    path('actualiza-pedido/<pk>', PedidoUpdate.as_view(), name='ActualizarPedido'),
     path('elimina-pedido/<pk>', PedidoDelete.as_view(), name='EliminaPedido'),
+    path('enviar-mensaje/', enviar_mensaje, name='EnviarMensaje'),
+    path('ver-mensajes/', ver_mensajes, name='Mensajes'),
+    path('responder-mensaje/<int:mensaje_id>/',responder_mensaje, name='responder_mensaje'),
+    path('eliminar-mensaje/<pk>/', MensajeDelete.as_view(), name='EliminarMensaje')
 ]
 

@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+
+<div class="container mt-5">
+    <h1>Mensajes Enviados y Recibidos</h1>
+    <ul class="list-group">
+        {% for mensaje in mensajes %}
+        <li class="list-group-item">
+                <strong>De:</strong> {% if mensaje.emisor == user %}Tú{% else %}{{ mensaje.emisor.username }}{% endif %}<br>
+                <strong>Para:</strong> {% if mensaje.receptor == user %}Tú{% else %}{{ mensaje.receptor.username }}{% endif %}<br>
+                <strong>Contenido:</strong> {{ mensaje.contenido }}<br>
+                <strong>Fecha de Envío:</strong> {{ mensaje.fecha_envio }}<br>
+                <a type="button" class="btn btn-warning" href="{% url 'responder_mensaje' mensaje.id %}"><i class="bi bi-pencil-square fs-40"> Responder </i></a>
+                <form method="post" style="display: inline-block;">
+                    {% csrf_token %}
+                    <input type="hidden" name="mensaje_id" value="{{ mensaje.id }}">
+                    <a type="button" class="btn btn-danger" href="{% url 'EliminarMensaje' mensaje.pk %}"><i class="bi bi-trash"></i></a>
+                </form>
+        </li>
+           
+        {% empty %}
+            <p>No hay mensajes aún.</p>
+        {% endfor %}
+
+    </ul>
+</div>
+    <a class="btn btn-primary" href="{% url 'EnviarMensaje' %}" role="button"> <i class="bi bi-pencil-square"> Enviar Mensaje</i></a>
+
+{% endblock bloqueMutable %}

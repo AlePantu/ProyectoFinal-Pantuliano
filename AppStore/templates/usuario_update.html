@@ -1,12 +1,52 @@
 {% extends 'main.html' %}
 
 {% block bloqueMutable %}
+
+<div class="container mt-5">
+    <div class="card">
+        <h1> Actualizar usuario</h1>
     
     <form action="{% url 'ActualizarUsuario' usuario.id%}" method="post">{% csrf_token %}
 
-        {{form.as_p}}
 
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="form-group row">
+        <label for="{{ form.nombre.id_for_label }}" class="col-sm-2 col-form-label">Nombre:</label>
+        <div class="col-sm-10">
+            {{ form.nombre }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="{{ form.apellido.id_for_label }}" class="col-sm-2 col-form-label">Apellido:</label>
+        <div class="col-sm-10">
+            {{ form.apellido }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="{{ form.email.id_for_label }}" class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-10">
+            {{ form.email }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="{{ form.nroLegajo.id_for_label }}" class="col-sm-2 col-form-label">Legajo:</label>
+        <div class="col-sm-10">
+            {{ form.nroLegajo }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="{{ form.user.id_for_label }}" class="col-sm-2 col-form-label">User:</label>
+        <div class="col-sm-10">
+            {{ form.user }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
+    </div>
+
+</form>
+</div>
+</div>
 
 {% endblock bloqueMutable %}

@@ -2,10 +2,13 @@
 
 {% block bloqueMutable %}
            
-<form action="{% url 'Buscar' %}" method="get">
-
-    <p><input type="text" name="nombre"></p>
-
-    <button type="submit">Buscar Producto</button>
+<form action="{% url 'Buscar' %}" method="get" class="container mt-5">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar producto por nombre" name="nombre">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </div>
 </form>
+
 {% endblock bloqueMutable %}

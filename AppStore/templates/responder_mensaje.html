@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block bloqueMutable %}
+
+    <div class="container mt-5">
+        <h1>Responder a Mensaje</h1>
+        <p>Responder al mensaje de: {% if mensaje.emisor == user %}Tú{% else %}{{ mensaje.emisor.username }}{% endif %}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.destinatario.as_hidden }}
+            <div class="form-group">
+                <label for="{{ form.contenido.id_for_label }}">Mensaje:</label>
+                {{ form.contenido}}
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar Respuesta</button>
+            <a class="btn btn-secondary" href="{% url 'Mensajes' %}">Cancelar</a>
+        </form>
+        
+    </div>
+
+{% endblock bloqueMutable %}

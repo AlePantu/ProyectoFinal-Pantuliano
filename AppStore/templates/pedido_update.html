@@ -1,12 +1,24 @@
 {% extends 'main.html' %}
 
 {% block bloqueMutable %}
+
+<div class="container mt-5">
     
-    <form action="{% url 'ActualizarPedido' pedido.id%}" method="post">{% csrf_token %}
-
-        {{form.as_p}}
-
-        <button type="submit">Enviar</button>
+    <div class="card">
+        <h1> Modificacion Pedido</h1>
+    <form action="{% url 'ActualizarPedido' pedido.id %}" method="post" class="container mt-5">
+        {% csrf_token %}
+        <div class="form-group">
+            {{form.as_p}}
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar Cambios</button>
     </form>
+
+    <div class="alert alert-primary" role="alert">
+        <li>Agregar o Deseleccionar los productos del pedido</li> 
+        
+    </div>
+</div>
+</div>
 
 {% endblock bloqueMutable %}

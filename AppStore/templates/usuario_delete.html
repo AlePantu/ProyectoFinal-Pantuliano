@@ -2,12 +2,20 @@
 
 {% block bloqueMutable %}
 
-    <form method="post">{% csrf_token %}
-
-        <p>Está seguro de eliminar el Usuario</p>
-
-         <button type="submit">Confirmar</button>
-        <button><a href="{% url 'Inicio' %}">Cancelar</a></button>
-    </form>
+    <<div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="h3">Confirmar Eliminación</h1>
+            </div>
+            <div class="card-body">
+                <p>¿Estás seguro de que deseas eliminar este Usuario?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+                    <a class="btn btn-secondary" href="{% url 'Usuarios' %}">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock bloqueMutable %}

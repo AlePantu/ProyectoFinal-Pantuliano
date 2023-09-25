@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404 , redirect
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -7,7 +7,8 @@ from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm ,UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
+from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
 from .forms import PedidoFormSet
@@ -46,10 +47,6 @@ def proveedores(req):
 
 def producto_formulario(req : HttpRequest):
 
-    print('method' , req.method)
-    print('post' , req.POST)
-
-
     if req.method == 'POST':
 
         miFormulario = ProductoFormulario(req.POST)
@@ -58,7 +55,7 @@ def producto_formulario(req : HttpRequest):
             print(miFormulario.cleaned_data)
             data = miFormulario.cleaned_data
 
-            producto = Producto(nombre = data["nombre"] , tipo = data["tipo"] , modelo = data["modelo"] , descripcion = data["descripcion"])
+            producto = Producto(nombre = data["nombre"] , tipo = data["tipo"] , modelo = data["modelo"] , descripcion = data["descripcion"] , stock =data["stock"])
             producto.save()
             return render (req , "inicio.html" , {"mensaje":"Producto creado con exito" })
         else:
@@ -161,6 +158,12 @@ class PedidoUpdate(UpdateView):
     success_url = "/app-store/pedidos"
 
 
+class MensajeDelete(DeleteView):
+    model = Mensaje
+    template_name = 'mensaje_delete.html'
+    success_url = "/app-store/ver-mensajes"
+
+
 
 def loginView(req):
 
@@ -247,9 +250,6 @@ def register(req):
     
     
 def pedido_formulario(req : HttpRequest):
-
-
-
     if req.method == 'POST':
 
         miFormulario = PedidoFormSet(req.POST)
@@ -272,3 +272,54 @@ def pedido_formulario(req : HttpRequest):
         miFormulario = PedidoFormSet()
 
         return render(req, "pedido_formulario.html" , {"miFormulario" : miFormulario})
+
+
+@login_required
+def enviar_mensaje(request, usuario_destino_id=None):
+    usuarios_disponibles = User.objects.exclude(id=request.user.id)
+    destino = None
+
+    if usuario_destino_id:
+        destino = get_object_or_404(User, id=usuario_destino_id)
+
+    if request.method == 'POST':
+        form = MensajeForm(request.POST)
+        if form.is_valid():
+            contenido = form.cleaned_data['contenido']
+            destinatario = form.cleaned_data['destinatario']
+            mensaje = Mensaje(emisor=request.user, receptor=destinatario, contenido=contenido)
+            mensaje.save()
+            return redirect('Mensajes')
+    else:
+        form = MensajeForm()
+
+    return render(request, 'enviar_mensaje.html', {'form': form, 'destino': destino, 'usuarios': usuarios_disponibles})
+
+@login_required
+def ver_mensajes(request):
+    mensajes = Mensaje.objects.filter(
+        models.Q(emisor=request.user) | models.Q(receptor=request.user)
+    ).order_by('fecha_envio')
+
+    return render(request, 'ver_mensajes.html', {'mensajes': mensajes})
+
+@login_required
+def seleccionar_destinatario(request):
+    usuarios_disponibles = User.objects.exclude(id=request.user.id)
+    return render(request, 'seleccionar_destinatario.html', {'usuarios': usuarios_disponibles})
+
+@login_required
+def responder_mensaje(request, mensaje_id):
+    mensaje = get_object_or_404(Mensaje, id=mensaje_id)
+    
+    if request.method == 'POST':
+        form = MensajeForm(request.POST)
+        if form.is_valid():
+            contenido = form.cleaned_data['contenido']
+            respuesta = Mensaje(emisor=request.user, receptor=mensaje.emisor, contenido=contenido)
+            respuesta.save()
+            return redirect('ver_mensajes')
+
+    form = MensajeForm(initial={'destinatario': mensaje.emisor})
+
+    return render(request, 'responder_mensaje.html', {'mensaje': mensaje, 'form': form})

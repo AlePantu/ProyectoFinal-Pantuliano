@@ -19,6 +19,7 @@ class ProductoFormulario(forms.Form):
     tipo = forms.CharField(required=True)
     modelo = forms.CharField(required=True)
     descripcion= forms.CharField(required=True)
+    stock =forms.IntegerField(required=True)
 
 
 class ProveedorFormulario(forms.Form):
@@ -48,3 +49,18 @@ class PedidoFormulario(forms.Form):
     )
 
 PedidoFormSet = formset_factory(PedidoFormulario)
+
+
+class MensajeForm(forms.ModelForm):
+    destinatario = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='Destinatario'
+    )
+
+    class Meta:
+        model = Mensaje
+        fields = ['destinatario', 'contenido']
+        widgets = {
+            'contenido': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escribe tu mensaje...'}),
+        }

@@ -1,26 +1,42 @@
 {% extends 'main.html' %}
 
 {% block bloqueMutable %}
+
+
+<div class="container mt-5">
+  <div class="card">
+      <h1> Registrar nuevo usuario</h1>
 <div class="container">
   <div class="row my-5">
       <div class="col-md-12">
     
         <form action="{% url 'Registrar' %}" method="POST">{% csrf_token %}
 
-           {{miFormulario.as_p}}
-           {{userForm.as_p}}
+        <div class="form-group">
+            {{miFormulario.as_p}}
+        </div>
+        <div class="form-group">
+          {{userForm.as_p}}
+         </div>
+           
 
           
-          <button type="submit">Registrar</button>
+           <button class="btn btn-primary" type="submit">Registrar</button>
 
-          <div class="alert alert-primary" role="alert">
-            <li>Las contraseñas deben de ser como minimo de 8 caracteres</li> 
-            <li>No deben ser contraseñas comunes</li>  
-          </div>
+           <div class="alert alert-primary mt-3" role="alert">
+            <ul>
+                <li>Las contraseñas deben tener como mínimo 8 caracteres.</li>
+                <li>No deben ser contraseñas comunes.</li>
+                <li>Las contraseñas no deben ser similares a la informacion suministrada arriba.</li>
+                <li>Las contraseñas no deben ser enteramente numericas.</li>
+            </ul>
+        </div>
 
         </form>
       </div>
   </div>
+</div>
+</div>
 </div>
 
 {% endblock bloqueMutable %}
